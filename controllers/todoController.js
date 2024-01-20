@@ -1,19 +1,5 @@
 const Todo = require("../models/todo")
 
-/*
-200 - good response
-    201 - created
-    204 - no content
-300 - redirect
-    301 - redirect
-    302 - redirect
-400 - bad response but it was the users fault
-    401 - unauthorized
-    403 - forbidden
-    404 - not found
-500 - server error
-*/
-
 exports.index = async function index(req, res) {
   //grab all todos
   try {
@@ -33,19 +19,6 @@ exports.create = async function create(req, res) {
 
 exports.update = async function update(req, res) {
   //update a todo already made
-
-  /*
-  in the db {
-    title: 'Do my assignments'
-  }
-
-
-  req.body {
-    title: 'Do my hw'
-  }
-
-  */
-
   try {
     const updatedTodo = await Todo.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true } )
     res.status(200).json(updatedTodo)
