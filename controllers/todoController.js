@@ -14,7 +14,9 @@ exports.create = async function create(req, res) {
   // make a todo
   try {
     const todo = await Todo.create(req.body)
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ msg: error.message })
+  }
 }
 
 exports.update = async function update(req, res) {
@@ -33,7 +35,9 @@ exports.destroy = async function destroy(req, res) {
     await Todo.findOneAndDelete({ _id: req.params.id })
 
     res.status(204).json({ msg: `The todo with the Id of ${req.params.id} was deleted from the MongoDB database, no further action necessary`})
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ msg: error.message })
+  }
 }
 
 exports.show = async function show(req, res) {
